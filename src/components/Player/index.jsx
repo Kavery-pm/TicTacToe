@@ -8,7 +8,7 @@ import { useState } from "react";
  * - name: display name
  * - symbol: 'X' | 'O' | null
  */
-const Player = ({ name, symbol }) => {
+const Player = ({ name, symbol, isActive }) => {
     const [isEditing, setisEditing] = useState(false);
     const [playerName, setplayerName]=useState(name);
     const editHandler = () => {
@@ -19,7 +19,7 @@ const Player = ({ name, symbol }) => {
     }
     return (
 
-        <li>
+        <li className={isActive ?'highlight-player' : undefined}>
             <span className='player'>
                 {isEditing ? (
                     <input

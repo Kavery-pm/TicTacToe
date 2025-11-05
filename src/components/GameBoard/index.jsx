@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 
 const initialSquares = Array(3).fill(null).map(() => Array(3).fill(null));
 
-const GameBoard = () => {
+const GameBoard = ({onSelect, activePlayer}) => {
     const [gameBoard, setgameBoard]=useState(initialSquares);
 
     const handleSelectSquare = (rowIndex, colIndex) => {
         setgameBoard(prevBoard => {
             const newBoard = [...prevBoard.map(row => [...row])];
-            newBoard[rowIndex][colIndex] = 'X'; 
+            newBoard[rowIndex][colIndex] = activePlayer; 
             return newBoard;
         });
+        onSelect();
     }
     return (
         <ol id='game-board'>
