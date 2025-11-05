@@ -19,7 +19,7 @@ const Player = ({ name, symbol, isActive }) => {
     }
     return (
 
-        <li className={isActive ?'highlight-player' : undefined}>
+        <li className={isActive ?'active' : undefined}>
             <span className='player'>
                 {isEditing ? (
                     <input
