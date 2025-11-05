@@ -1,43 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 /**
  * Player component
  * Props:
  * - name: display name
  * - symbol: 'X' | 'O' | null
- * - isTurn: highlight when it's player's turn
- * - score: numeric score
- * - onClick: optional click handler
  */
-const Player = ({name, symbol}) => {
+const Player = ({ name, symbol }) => {
+    const [isEditing, setisEditing] = useState(false);
+    const [playerName, setplayerName]=useState(name);
+    const editHandler = () => {
+        setisEditing(isEditing => !isEditing);
+    }
+    const onChangeHandler = (e) => {
+     setplayerName(e.target.value);
+    }
     return (
- 
-       <li>
+
+        <li>
             <span className='player'>
-              <span id='player-name'>{name}</span>
-              <span className='player-symbol'>{symbol}</span>
-              <button>Edit</button>
+                {isEditing ? (
+                    <input
+                        type="text"
+                        value={playerName}
+                        onChange={onChangeHandler}
+                        onBlur={() => setisEditing(false)}
+                        autoFocus
+                    />
+                ) : (
+                    <span id='player-name'>{playerName}</span>)}
+                <span className='player-symbol'>{symbol}</span>
+                <button onClick={editHandler}>{!isEditing ? 'Edit' : 'Save'}</button>
             </span>
-          </li>
-      
+        </li>
+
     );
 };
 
 Player.propTypes = {
     name: PropTypes.string,
     symbol: PropTypes.oneOf(["X", "O", null]),
-    // isTurn: PropTypes.bool,
-    // score: PropTypes.number,
-    // onClick: PropTypes.func,
 };
 
 Player.defaultProps = {
     name: "Player",
-    // symbol: null,
-    // isTurn: false,
-    // score: 0,
-    // onClick: () => {},
+    symbol: null,
 };
 
 export default Player;
