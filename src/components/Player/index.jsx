@@ -1,24 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-/**
- * Player component
- * Props:
- * - name: display name
- * - symbol: 'X' | 'O' | null
- */
-const Player = ({ name, symbol, isActive }) => {
+const Player = ({ name, symbol, isActive, nameChangeHandler }) => {
     const [isEditing, setisEditing] = useState(false);
     const [playerName, setplayerName] = useState(name);
+
+
+    const saveAndExit = () => {
+        const trimmed = playerName.trim() || name;
+        nameChangeHandler?.(symbol, trimmed);
+    };
+
     const editHandler = () => {
-        setisEditing(isEditing => !isEditing);
-    }
+        if (isEditing) {
+            saveAndExit();
+        } else {
+            setisEditing(true);
+        }
+    };
+
     const onChangeHandler = (e) => {
         setplayerName(e.target.value);
-    }
-    return (
+    };
 
+    return (
         <li className={isActive ? 'active' : undefined}>
             <span className='player'>
                 {isEditing ? (
@@ -26,22 +31,24 @@ const Player = ({ name, symbol, isActive }) => {
                         type="text"
                         value={playerName}
                         onChange={onChangeHandler}
-                        onBlur={() => setisEditing(false)}
                         autoFocus
                     />
                 ) : (
-                    <span id='player-name'>{playerName}</span>)}
+
+                    <span id='player-name'>{name}</span>
+                )}
                 <span className='player-symbol'>{symbol}</span>
-                <button onClick={editHandler} disabled={symbol!==null}>{!isEditing ? 'Edit' : 'Save'}</button>
+                <button onClick={editHandler}>{isEditing ? 'Save' : 'Edit'}</button>
             </span>
         </li>
-
     );
 };
 
 Player.propTypes = {
     name: PropTypes.string,
     symbol: PropTypes.oneOf(["X", "O", null]),
+    isActive: PropTypes.bool,
+    nameChangeHandler: PropTypes.func,
 };
 
 Player.defaultProps = {
