@@ -10,16 +10,16 @@ import { useState } from "react";
  */
 const Player = ({ name, symbol, isActive }) => {
     const [isEditing, setisEditing] = useState(false);
-    const [playerName, setplayerName]=useState(name);
+    const [playerName, setplayerName] = useState(name);
     const editHandler = () => {
         setisEditing(isEditing => !isEditing);
     }
     const onChangeHandler = (e) => {
-     setplayerName(e.target.value);
+        setplayerName(e.target.value);
     }
     return (
 
-        <li className={isActive ?'active' : undefined}>
+        <li className={isActive ? 'active' : undefined}>
             <span className='player'>
                 {isEditing ? (
                     <input
