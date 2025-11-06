@@ -56,14 +56,13 @@ function App() {
       firstSquareSymbol === secondSquareSymbol &&
       firstSquareSymbol === thirdSquareSymbol
     ) {
-     winner = players[firstSquareSymbol]
+      winner = players[firstSquareSymbol]
     }
   }
 
   const hasDraw = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex, colIndex) {
-    // setActivePlayer((curActivePlayer) => (curActivePlayer === 'X' ? 'O' : 'X'));
     setGameTurns((prevTurns) => {
       const currentPlayer = deriveActivePlayer(prevTurns);
 
@@ -75,12 +74,12 @@ function App() {
       return updatedTurns;
     });
   }
-const handlePlayerNameChange = (playerSymbol, newName) => {
-  console.log(playerSymbol, newName);
-    setPlayers((prevPlayers)=>{
+  const handlePlayerNameChange = (playerSymbol, newName) => {
+    console.log(playerSymbol, newName);
+    setPlayers((prevPlayers) => {
       return {
         ...prevPlayers,
-        [playerSymbol]: newName   
+        [playerSymbol]: newName
       }
 
     })
@@ -97,7 +96,7 @@ const handlePlayerNameChange = (playerSymbol, newName) => {
             nameChangeHandler={handlePlayerNameChange}
           />
           <Player
-              name={players['O']}
+            name={players['O']}
             symbol="O"
             isActive={activePlayer === 'O'}
             nameChangeHandler={handlePlayerNameChange}
