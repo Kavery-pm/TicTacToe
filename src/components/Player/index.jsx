@@ -32,7 +32,7 @@ const Player = ({ name, symbol, isActive }) => {
                 ) : (
                     <span id='player-name'>{playerName}</span>)}
                 <span className='player-symbol'>{symbol}</span>
-                <button onClick={editHandler}>{!isEditing ? 'Edit' : 'Save'}</button>
+                <button onClick={editHandler} disabled={symbol!==null}>{!isEditing ? 'Edit' : 'Save'}</button>
             </span>
         </li>
 
