@@ -1,11 +1,15 @@
-export default function GameOver({ winner }) {
+export default function GameOver({ winner, resetGame }) {
+    const handleRematch = () => {
+        // Logic to reset the game state for a rematch
+        resetGame();
+    }
   return (
     <div id="game-over">
       <h2>Game Over!</h2>
       {winner && <p>{winner} won!</p>}
       {!winner && <p>It&apos;s a draw!</p>}
       <p>
-        <button>Rematch!</button>
+        <button onClick={handleRematch}>Rematch!</button>
       </p>
     </div>
   );
