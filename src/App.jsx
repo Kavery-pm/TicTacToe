@@ -25,7 +25,7 @@ function deriveActivePlayer(gameTurns) {
 
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
- 
+
   const activePlayer = deriveActivePlayer(gameTurns);
 
   let gameBoard = [...initialGameBoard.map(row => [...row])];
@@ -87,7 +87,7 @@ function App() {
             isActive={activePlayer === 'O'}
           />
         </ol>
-        {(winner || hasDraw) && <GameOver winner={winner} resetGame={()=>setGameTurns([])}/>}
+        {(winner || hasDraw) && <GameOver winner={winner} resetGame={() => setGameTurns([])} />}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
