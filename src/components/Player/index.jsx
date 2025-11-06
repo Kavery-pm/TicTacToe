@@ -31,6 +31,7 @@ const Player = ({ name, symbol, isActive, nameChangeHandler }) => {
                         type="text"
                         value={playerName}
                         onChange={onChangeHandler}
+                        onBlur={saveAndExit}
                         autoFocus
                     />
                 ) : (
